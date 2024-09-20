@@ -21,9 +21,10 @@ def singlePortScanner(port):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((target, port))
-        print(f"{port}")
+        print(f"{port} is open")
         OpenPorts.append(port)
     except:
+        print(f'{port} is closed')
         pass
 
 #Function 3

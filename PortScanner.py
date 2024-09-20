@@ -3,7 +3,7 @@ from functions import singlePortScanner, OpenPorts, WhitelistedPortsList
 
 print('Port scanner is Running...')
 
-# Port scanning
+# Port scanning via multi thread distribution
 start = time.time()
 for port in range(1, 65536):
     if port in WhitelistedPortsList:

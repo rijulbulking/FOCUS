@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Data Usage</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+        }
+        .data-list {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #2e2e2e;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .data-list div {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Application Data Usage</h1>
+
+        <div class="data-list" id="dataList">
+            <h3>Current Application Speeds (Mbps)</h3>
+            <!-- Current speeds will be populated here -->
+        </div>
+    </div>
+
+    <script>
+        function fetchData() {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    // Update the data list with the application speeds
+                    const dataList = document.getElementById('dataList');
+                    dataList.innerHTML = '<h3>Current Application Speeds (Mbps)</h3>'; // Reset content
+
+                    for (const app in data) {
+                        const speed = data[app].toFixed(2); // Format to 2 decimal places
+                        dataList.innerHTML += `<div>${app}: ${speed} Mbps</div>`;
+                    }
+                });
+        }
+
+        setInterval(fetchData, 1000); // Fetch data every second
+    </script>
+</body>
+</html>

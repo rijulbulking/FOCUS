@@ -1,6 +1,6 @@
 import threading, time, webbrowser
 from colorama import Fore
-from functions import singlePortScanner, clear, PortCloser ,OpenPorts, WhitelistedPortsList
+from functions import singlePortScanner, clear, PortCloser , multiPortScanner, OpenPorts, WhitelistedPortsList
 
 while True:
     #Display project name
@@ -34,11 +34,7 @@ while True:
 
         # Port scanning via multi-thread distribution
         start = time.time()  # Function Start Time
-        for port in range(1, 65536):
-            if port in WhitelistedPortsList:
-                continue
-            thread = threading.Thread(target=singlePortScanner, args=[port])
-            thread.start()
+        multiPortScanner(1, 65536)
         end = time.time()
 
         #Message formatting

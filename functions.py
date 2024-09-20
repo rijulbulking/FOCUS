@@ -1,5 +1,5 @@
 #Module Import
-import platform, os, socket, psutil
+import platform, os, socket, psutil, threading
 
 #Variable Assignment
 Platform = platform.system()
@@ -25,6 +25,15 @@ def singlePortScanner(port):
         OpenPorts.append(port)
     except:
         pass
+
+#Function 3
+def multiPortScanner(startPort, endPort):
+    for port in range(startPort, endPort):
+            if port in WhitelistedPortsList:
+                continue
+            thread = threading.Thread(target=singlePortScanner, args=[port])
+            thread.start()
+    thread.join()
 
 #Function 3
 def PortCloser(port):

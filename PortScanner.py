@@ -1,4 +1,4 @@
-import time
+import time, threading
 from functions import singlePortScanner, OpenPorts, WhitelistedPortsList
 
 print('Port scanner is Running...')
@@ -8,15 +8,12 @@ start = time.time()
 for port in range(1, 65536):
     if port in WhitelistedPortsList:
         continue
-
-    singlePortScanner(port)
+    thread = threading.Thread(target=singlePortScanner, args=[port])
+    thread.start()
+thread.join()
 end = time.time()
 
-#Message formatting
-message = ''
-for port in OpenPorts:
-    message = message + str(port) + '\n'
 
 if len(OpenPorts) == 0:
     print('No port detected.')
-input('Scan Complete\n')
+input(f'Scan Complete\nTime taken: {end-start} seconds\n')

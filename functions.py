@@ -24,7 +24,6 @@ def singlePortScanner(port):
         print(f"{port} is open")
         OpenPorts.append(port)
     except:
-        print(f"{port} is closed")
         pass
 
 #Function 3

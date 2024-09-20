@@ -21,8 +21,6 @@
   <a href="#credits">Credits</a> 
 </p>
 
-![screenshot](https://github.com/rijulbulking/FOCUS/blob/main/FOCUS.png)
-
 <u>
 
 ## **✨Key Features**
@@ -65,6 +63,7 @@ First Verion of the code focused primarily on developing a mechanism to scan all
 
 <br>
 Scanning just 100 ports would take 204 Seconds, meaning scanning all 65535 ports would take approximately 36 hours.
+<br>
 However a method was found where multiple ports scans could be initialized in seperate threads. This tremendously reduced the scan time to seconds:
 
 <a href="https://github.com/rijulbulking/FOCUS"><img src="https://raw.githubusercontent.com/rijulbulking/FOCUS/refs/heads/master/ProjectPhotos/SecondScanTest.png" alt="Second Test Result" width="300"> </a>

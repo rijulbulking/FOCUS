@@ -1,4 +1,4 @@
-import threading, time, webbrowser
+import time, webbrowser, subprocess
 from colorama import Fore
 from functions import singlePortScanner, clear, PortCloser , multiPortScanner, OpenPorts, WhitelistedPortsList
 
@@ -19,7 +19,8 @@ while True:
     print(f"{Fore.CYAN}Options -")
     print("")
     print(f"{Fore.GREEN}1."f"{Fore.MAGENTA} Port Scanner")
-    print(f"{Fore.GREEN}2."f"{Fore.MAGENTA} Github Link")
+    print(f"{Fore.GREEN}2."f"{Fore.MAGENTA} Network Spike Detection")
+    print(f"{Fore.GREEN}3."f"{Fore.MAGENTA} Github Link")
     print('')
     print(f"{Fore.GREEN}0."f"{Fore.MAGENTA} Exit Program")
 
@@ -56,9 +57,13 @@ while True:
             print('Hit enter to continue...')
             input()
 
-    elif UserInput1.strip() == '2':
+    elif UserInput1.strip() == '3':
         clear()
         print(webbrowser.open('https://github.com/rijulbulking/FOCUS'))
+
+    elif UserInput1.strip() == '2':
+        clear()
+        subprocess.run(['python', 'fullautomatictrust.py'])
 
     elif UserInput1.strip() == '0':
         break

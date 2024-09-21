@@ -28,6 +28,7 @@ while True:
     print(f"{Fore.CYAN}")
     #Wait on user input
     UserInput1 = (input(">  "))
+    print(f"{Fore.RESET}")
 
     #Input Tree
     if UserInput1.strip() == '1':
@@ -68,7 +69,10 @@ while True:
 
     elif UserInput1.strip() == '3':
         clear()
-        subprocess.run(['python', 'aiNetworkSpikeDetector.py'])
+        try:
+            subprocess.run(['python', 'aiNetworkSpikeDetector.py'])
+        except KeyboardInterrupt:
+            pass
 
     elif UserInput1.strip() == '0':
         break

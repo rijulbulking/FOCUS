@@ -1,6 +1,7 @@
 import psutil, time, joblib
 import pandas as pd
 from colorama import Fore
+from functions import clear
 
 
 #importing ai models
@@ -21,6 +22,7 @@ def bytes_to_mbps(bytes_value):
 # Initial time and network usage to calculate elapsed time and data speed
 start_time = time.time()
 prev_inbound, prev_outbound = get_network_data()
+detected = False
 
 # Infinite loop to log data every second
 spikesDetected = 0
@@ -28,6 +30,7 @@ try:
     while True:
         # Sleep for 1 second
         time.sleep(1)
+        clear()
         
         # Get current time and network data
         current_time = time.time()
@@ -42,22 +45,26 @@ try:
         inboundPrediction = inboundModel.predict(input_data)
         outboundPrediction = outboundModel.predict(input_data)
         
-        if inbound_speed-outbound_speed > 3:
+        if inbound_speed-outbound_speed > 2:
             spikesDetected+=1
         else:
             spikesDetected = 0
 
-        if spikesDetected == 3:
-            print(f'{Fore.RED}Warning, Network Surge detected!{Fore.RESET}')
+        if spikesDetected >= 3:
+            # print(f'{Fore.RED}Warning, Network Surge detected!{Fore.RESET}')
+            detected = True
+        else:
+            detected = False
 
         
         # Update previous values for the next iteration
         prev_inbound, prev_outbound = current_inbound, current_outbound
         
         # Print the results (optional)
+        if detected == True:
+            print(f'{Fore.RED}Warning, Network Surge detected!{Fore.RESET}')
         print(f"Time Elapsed: {elapsed_time}s | Inbound: {inbound_speed} Mbps | Outbound: {outbound_speed} Mbps")
         print(f"Time Elapsed: {elapsed_time}s | Predicted Inbound: {round(inboundPrediction[0], 2)} Mbps | Predicted Outbound: {round(outboundPrediction[0], 2)} Mbps")
-        print()
 
 except KeyboardInterrupt:
     print("\nMonitoring stopped.")

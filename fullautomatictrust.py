@@ -1,8 +1,4 @@
-import psutil
-import requests
-import webbrowser
-import os
-import time
+import psutil, requests, webbrowser, os, time
 
 # Function to get the current network usage in bytes
 def monitor_network():

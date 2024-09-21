@@ -1,6 +1,4 @@
-import psutil
-import csv
-import time
+import psutil, csv, time
 
 # CSV file name
 csv_file = 'network_data_log.csv'

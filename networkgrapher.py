@@ -13,16 +13,16 @@ def create_graph():
 
     # Add traces for inbound and outbound data
     fig.add_trace(go.Scatter(
-        x=df['Time Elapsed (s)'],
-        y=df['Inbound Data (Mbps)'],
+        x=df['elapsed_time'],
+        y=df['inbound_data'],
         mode='lines',
         name='Inbound Data (Mbps)',
         line=dict(color='cyan')
     ))
 
     fig.add_trace(go.Scatter(
-        x=df['Time Elapsed (s)'],
-        y=df['Outbound Data (Mbps)'],
+        x=df['elapsed_time'],
+        y=df['outbound_data'],
         mode='lines',
         name='Outbound Data (Mbps)',
         line=dict(color='magenta')

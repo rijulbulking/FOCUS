@@ -1,4 +1,4 @@
-Time Elapsed (s),Inbound Data (KB/s),Outbound Data (KB/s)
+elapsed_time,inbound_data,outbound_data
 1,0.28,0.11
 2,0.24,0.04
 3,0.2,0.0

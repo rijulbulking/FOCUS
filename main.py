@@ -20,7 +20,8 @@ while True:
     print("")
     print(f"{Fore.GREEN}1."f"{Fore.MAGENTA} Port Scanner")
     print(f"{Fore.GREEN}2."f"{Fore.MAGENTA} Network Spike Detection")
-    print(f"{Fore.GREEN}3."f"{Fore.MAGENTA} Github Link")
+    print(f"{Fore.GREEN}3."f"{Fore.MAGENTA} AI Network Surge Detector")
+    print(f"{Fore.GREEN}4."f"{Fore.MAGENTA} Github Link")
     print('')
     print(f"{Fore.GREEN}0."f"{Fore.MAGENTA} Exit Program")
 
@@ -57,13 +58,17 @@ while True:
             print('Hit enter to continue...')
             input()
 
-    elif UserInput1.strip() == '3':
+    elif UserInput1.strip() == '4':
         clear()
         print(webbrowser.open('https://github.com/rijulbulking/FOCUS'))
 
     elif UserInput1.strip() == '2':
         clear()
         subprocess.run(['python', 'fullautomatictrust.py'])
+
+    elif UserInput1.strip() == '3':
+        clear()
+        subprocess.run(['python', 'aiNetworkSpikeDetector.py'])
 
     elif UserInput1.strip() == '0':
         break

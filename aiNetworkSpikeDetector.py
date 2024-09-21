@@ -1,5 +1,6 @@
 import psutil, time, joblib
 import pandas as pd
+from colorama import Fore
 
 
 #importing ai models
@@ -47,7 +48,7 @@ try:
             spikesDetected = 0
 
         if spikesDetected == 3:
-            print('Warning, Network Surge detected!')
+            print(f'{Fore.RED}Warning, Network Surge detected!{Fore.RESET}')
 
         
         # Update previous values for the next iteration

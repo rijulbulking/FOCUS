@@ -41,23 +41,23 @@
         </style>
     </head>
     <body>
-        <h2>Server Location Map for IP: 204.79.197.222</h2>
+        <h2>Server Location Map for IP: 142.251.175.188</h2>
         <div id="map"></div>
         <div class="info">
-            <p>Location: Montreal, Quebec, Canada</p>
-            <p>ISP: Microsoft Corporation</p>
-            <p>AS: AS8068 Microsoft Corporation</p>
-            <p>Program: SearchHost.exe</p>
+            <p>Location: Gaithersburg, Maryland, United States</p>
+            <p>ISP: Google LLC</p>
+            <p>AS: AS15169 Google LLC</p>
+            <p>Program: chrome.exe</p>
         </div>
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <script>
-            var map = L.map('map').setView([45.5019, -73.5674], 10);
+            var map = L.map('map').setView([39.1723, -77.183], 10);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
-            L.marker([45.5019, -73.5674]).addTo(map)
-                .bindPopup("204.79.197.222<br>(Montreal, Quebec, Canada)<br>Program: SearchHost.exe").openPopup();
+            L.marker([39.1723, -77.183]).addTo(map)
+                .bindPopup("142.251.175.188<br>(Gaithersburg, Maryland, United States)<br>Program: chrome.exe").openPopup();
         </script>
     </body>
     </html>

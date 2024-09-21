@@ -1,4 +1,4 @@
-import psutil, time, joblib
+import psutil, time, joblib, subprocess
 import pandas as pd
 from colorama import Fore
 from functions import clear
@@ -50,19 +50,20 @@ try:
         else:
             spikesDetected = 0
 
-        if spikesDetected >= 3:
+        if spikesDetected == 3:
             # print(f'{Fore.RED}Warning, Network Surge detected!{Fore.RESET}')
-            detected = True
+            print(f'{Fore.RED}Warning, Network Surge detected!{Fore.RESET}')
+            subprocess.run(['python', 'fullautomatictrust.py'])
+        elif spikesDetected > 3:
+            print(f'{Fore.RED}Warning, Network Surge detected!{Fore.RESET}')
         else:
-            detected = False
+            pass
 
         
         # Update previous values for the next iteration
         prev_inbound, prev_outbound = current_inbound, current_outbound
         
         # Print the results (optional)
-        if detected == True:
-            print(f'{Fore.RED}Warning, Network Surge detected!{Fore.RESET}')
         print(f"Time Elapsed: {elapsed_time}s | Inbound: {inbound_speed} Mbps | Outbound: {outbound_speed} Mbps")
         print(f"Time Elapsed: {elapsed_time}s | Predicted Inbound: {round(inboundPrediction[0], 2)} Mbps | Predicted Outbound: {round(outboundPrediction[0], 2)} Mbps")
 

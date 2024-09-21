@@ -99,49 +99,27 @@ def create_map(location, ip, program_name):
 # Initialize a variable to store the last detected IP
 last_ip = None
 
-# Main loop to monitor and display network speed in Mbps
-previous_usage = monitor_network()
-threshold_mbps = 5.0  # Set your threshold in Mbps
+# Check IP
+connections = psutil.net_connections(kind='inet')
+for conn in connections:
+    if conn.status == 'ESTABLISHED' and conn.raddr and conn.raddr[0] != '127.0.0.1':
+        server_ip = conn.raddr[0]  # Get remote address
 
-while True:
-    time.sleep(1)  # Monitor every second
-    current_usage = monitor_network()
-    
-    # Calculate the difference in bytes over the 1-second interval
-    byte_diff = current_usage - previous_usage
-    
-    # Convert the byte difference to Mbps (megabits per second)
-    current_mbps = bytes_to_mbps(byte_diff, time_interval=1)
-    
-    # Display the current network speed in Mbps
-    print(f"Current Network Speed: {current_mbps:.2f} Mbps")
-    
-    # Check if the current Mbps exceeds the threshold
-    if current_mbps > threshold_mbps:
-        connections = psutil.net_connections(kind='inet')
-        for conn in connections:
-            if conn.status == 'ESTABLISHED' and conn.raddr and conn.raddr[0] != '127.0.0.1':
-                server_ip = conn.raddr[0]  # Get remote address
-
-                pid = conn.pid
+        pid = conn.pid
+        program_name = "Unknown"
+        if pid is not None:
+            try:
+                process = psutil.Process(pid)
+                program_name = process.name()
+            except psutil.NoSuchProcess:
                 program_name = "Unknown"
-                if pid is not None:
-                    try:
-                        process = psutil.Process(pid)
-                        program_name = process.name()
-                    except psutil.NoSuchProcess:
-                        program_name = "Unknown"
-                
-                # Only process if it's a new IP
-                if server_ip != last_ip:
-                    last_ip = server_ip  # Update the last IP
-                    location = get_geolocation(server_ip)
-                    if location:
-                        print(f"Incoming data from {server_ip}: {current_mbps:.2f} Mbps")
-                        create_map(location, server_ip, program_name)  # Pass the program name to the map function
+        
+        # Only process if it's a new IP
+        if server_ip != last_ip:
+            last_ip = server_ip  # Update the last IP
+            location = get_geolocation(server_ip)
+            if location:
+                #print(f"Incoming data from {server_ip}")
+                create_map(location, server_ip, program_name)  # Pass the program name to the map function
 
-                break  # Exit after processing the first valid external connection
-        break
-
-    # Update the previous usage for the next comparison
-    previous_usage = current_usage
+        break  # Exit after processing the first valid external connection
